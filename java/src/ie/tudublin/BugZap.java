@@ -11,6 +11,7 @@ public class BugZap extends PApplet
 
 	public void setup() {
 		reset();
+		resetProjectile();
 	}
 
 	/*
@@ -36,6 +37,15 @@ public class BugZap extends PApplet
 	float bugX, bugY, bugWidth = 30;
 	float halfBugWidth = bugWidth / 2;
 
+	float projectileX, projectileY;
+	float projectileSpeed = 5;
+	float projectileWidth = 30;
+	float halfprojectileWidth = projectileWidth / 2;
+
+	float pressed = 0;
+
+	float destroybug = 0;
+
 	void reset()
 	{
 		resetBug();
@@ -47,6 +57,12 @@ public class BugZap extends PApplet
 	{
 		bugX = random(halfBugWidth, width - halfBugWidth);
 		bugY = 50;
+	}
+
+	void resetProjectile()
+	{
+		projectileX = playerX;
+		projectileY = playerY;
 	}
 
 	void drawBug(float x, float y)
@@ -91,6 +107,12 @@ public class BugZap extends PApplet
 		
 	}
 
+	void drawProjectile(float x, float y, float w)
+	{
+		ellipse(x , y - 10, w -20, 20 );
+
+	}
+	
 	public void keyPressed()
 	{
 		if (keyCode == LEFT)
@@ -109,26 +131,33 @@ public class BugZap extends PApplet
 		}
 		if (key == ' ')
 		{
-			line(playerX, playerY, playerX, bugY);
+				pressed = 1;
+				
 		}
 	}	
 
 	void moveBug()
 	{
-		if ((frameCount % 60) == 0)
+		bugX ++;		
+		if (bugX + halfBugWidth > width + 30)
 		{
-			bugX += random(-5, +5);
-			if (bugX < halfBugWidth )
-			{
-			  bugX = halfBugWidth;
-			}
-			
-			if (bugX + halfBugWidth > width)
-			{
-			  bugX = width - halfBugWidth;
-			}
-			bugY ++;
+		  bugX = -30;
+		}	
+	}
+
+	void moveProjectile()
+	{
+		projectileY -= 5;
+		if(projectileY < bugY)
+		{
+			pressed = 0;
+			resetProjectile();
 		}
+
+		// if(projectileX == bugX && projectileY == bugY)
+		// {
+		// 	destroybug = 1;
+		// }
 	}
 
 	public void draw()
@@ -136,7 +165,16 @@ public class BugZap extends PApplet
 		background(0);		
 		fill(255);
 		drawPlayer(playerX, playerY, playerWidth);
-		drawBug(bugX, bugY);
-		moveBug();
+		if(destroybug == 0)
+		{
+			drawBug(bugX, bugY);
+			moveBug();
+		}
+		if(pressed == 1)
+		{
+			drawProjectile(projectileX, projectileY, projectileWidth);
+			moveProjectile();
+		}
+
 	}
 }
