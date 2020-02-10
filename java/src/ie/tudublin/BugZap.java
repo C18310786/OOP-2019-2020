@@ -154,10 +154,10 @@ public class BugZap extends PApplet
 			resetProjectile();
 		}
 
-		// if(projectileX == bugX && projectileY == bugY)
-		// {
-		// 	destroybug = 1;
-		// }
+		if(projectileX == bugX && projectileY == bugY)
+		{
+			destroybug = 1;
+		}
 	}
 
 	public void draw()
