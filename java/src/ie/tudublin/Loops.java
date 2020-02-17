@@ -31,7 +31,7 @@ public class Loops extends PApplet
 
 	public void loops2()
 	{
-		int numCircles  = (int) (20 * (mouseX / (float) width)) ;
+		int numCircles  = (int) (30 * (mouseX / (float) width)) ;
 		
 		float w = width / (float) numCircles;
 		float radius = w / 2.0f;
