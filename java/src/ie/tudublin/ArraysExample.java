@@ -89,6 +89,38 @@ public class ArraysExample extends PApplet
 		background(0);		
 		colorMode(HSB);	
 
-		drawBarChart();
+		DrawLine();
+		
+	}
+
+	void DrawLine()
+	{
+		float gap = width * 0.1f;
+		float halfGap = gap / 2.0f;
+		colorMode(RGB);
+		stroke(255, 255, 255);
+		textAlign(CENTER, CENTER);
+		for(int i = 0 ; i <=150 ; i += 10)
+		{
+			float x = map(i, 150, 0, gap, width -gap);				
+			line(halfGap + 20, x, halfGap + 25, x);
+			fill(255);
+			// text(i, x, halfGap);
+			text(i, halfGap, x);
+			
+		}	
+		for(int j = 35; j < 455; j += 35)
+		{
+			float x = map(j, 420, 0, gap, width -gap);	
+			line(x, halfGap + 425, x, halfGap + 435);
+		}
+
+		for(int m = 0; m < 12; m ++)
+		{
+			float x = map(m, 0, 12, gap, width -gap);	
+			text(months[m], x, 470);
+		}
+		line(50, gap, 50, height - gap);
+		line(gap, 450, height - gap, 450);
 	}
 }
