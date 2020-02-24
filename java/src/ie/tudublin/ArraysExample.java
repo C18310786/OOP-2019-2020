@@ -89,38 +89,99 @@ public class ArraysExample extends PApplet
 		background(0);		
 		colorMode(HSB);	
 
-		DrawLine();
+		// DrawLine();
+		pieChart();
 		
+	}
+
+	void pieChart()
+	{
+		fill(255);
+		stroke(255);
+		int x1 = 250;
+		int y1 = 250;
+		int x2 = 400;
+		int y2 = 400;
+
+		float percentage = 0f;
+		float previous_position = 0f;
+		float total_months = 0f;
+
+		for(int j = 0; j < months.length - 1; j ++)
+		{
+			total_months = total_months + rainFall[j];
+		}
+
+		for(int i = 0; i < months.length - 1; i ++)
+		{
+			// float x = map(i, 0, months.length - 1, 0, 2*PI);
+			percentage = rainFall[i] / total_months;
+			arc(x1, y1, x2, y2, previous_position, percentage);
+			previous_position = percentage;
+		}
 	}
 
 	void DrawLine()
 	{
-		float gap = width * 0.1f;
-		float halfGap = gap / 2.0f;
-		colorMode(RGB);
-		stroke(255, 255, 255);
+		float border = width * 0.10f;
+
 		textAlign(CENTER, CENTER);
-		for(int i = 0 ; i <=150 ; i += 10)
+		fill(255);
+		stroke(255);
+		line(border, border, border, height - border);
+		for(int ya = 0; ya <= 150; ya += 10)
 		{
-			float x = map(i, 150, 0, gap, width -gap);				
-			line(halfGap + 20, x, halfGap + 25, x);
-			fill(255);
-			// text(i, x, halfGap);
-			text(i, halfGap, x);
-			
-		}	
-		for(int j = 35; j < 455; j += 35)
-		{
-			float x = map(j, 420, 0, gap, width -gap);	
-			line(x, halfGap + 425, x, halfGap + 435);
+			float y = map(ya, 0, 150, height - border, border);
+			line(border, y, border - 5, y);
+			text(ya, border / 2, y);
+
 		}
 
-		for(int m = 0; m < 12; m ++)
+		line(border, height - border, width - border, height - border);
+		for(int xa  = 0; xa < months.length; xa ++)
 		{
-			float x = map(m, 0, 12, gap, width -gap);	
-			text(months[m], x, 470);
+			float x = map(xa, 0, months.length - 1, border, width - border);
+			line(x, height - border, x, height - (border - 5));
+			text(months[xa], x, height - border / 2);
 		}
-		line(50, gap, 50, height - gap);
-		line(gap, 450, height - gap, 450);
+
+		for(int i = 0; i < rainFall.length - 1; i++)
+		{
+			float x1 = map(i, 0, months.length - 1, border, width - border);
+			float x2 = map(i + 1, 0, months.length - 1, border, width - border);
+
+			float y1 = map(rainFall[i], 0, 150, height - border, border);
+			float y2 = map(rainFall[i] + 1, 0, 150, height - border, border);
+
+			line(x1, y1, x2, y2);
+		}
+
+		// float gap = width * 0.1f;
+		// float halfGap = gap / 2.0f;
+		// colorMode(RGB);
+		// stroke(255, 255, 255);
+		// textAlign(CENTER, CENTER);
+		// for(int i = 0 ; i <=150 ; i += 10)
+		// {
+		// 	float x = map(i, 150, 0, gap, width -gap);				
+		// 	line(halfGap + 20, x, halfGap + 25, x);
+		// 	fill(255);
+		// 	// text(i, x, halfGap);
+		// 	text(i, halfGap, x);
+			
+		// }	
+		// for(int j = 35; j < 455; j += 35)
+		// {
+		// 	float x = map(j, 420, 0, gap, width -gap);	
+		// 	line(x, halfGap + 425, x, halfGap + 435);
+		// }
+
+		// for(int m = 0; m < 12; m ++)
+		// {
+		// 	float x = map(m, 0, 12, gap, width -gap);	
+		// 	text(months[m], x, 470);
+		// }
+		// line(50, gap, 50, height - gap);
+		// line(gap, 450, height - gap, 450);
 	}
 }
