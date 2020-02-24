@@ -25,18 +25,36 @@ public class Sound1 extends PApplet
 	
 	public void draw()
 	{	
-		background(0);		
-		stroke(255);
-		float cy = height / 2;
+		// background(0);		
+		// stroke(255);
+		// float cy = height / 2;
 		
+		// for(int i = 0 ; i < ai.bufferSize() ; i ++)
+		// {
+		// 	stroke(
+		// 		map(i, 0, ai.bufferSize(), 0, 255)
+		// 		, 255
+		// 		, 255
+		// 	);
+		// 	line(i, cy, i, cy + ai.left.get(i) * cy);
+		// }
+
+		background(0);
+		float cy = height / 2;
+		float cx = width / 2;
+		float average = 0;
+		float sum = 0;
 		for(int i = 0 ; i < ai.bufferSize() ; i ++)
 		{
-			stroke(
+			fill(
 				map(i, 0, ai.bufferSize(), 0, 255)
 				, 255
 				, 255
 			);
-			line(i, cy, i, cy + ai.left.get(i) * cy);
+			sum = abs(sum + ai.left.get(i));
 		}
+		average = sum / ai.bufferSize();
+		float diameter = average * 1000;
+		ellipse(cx, cy, diameter, diameter);
 	}
 }

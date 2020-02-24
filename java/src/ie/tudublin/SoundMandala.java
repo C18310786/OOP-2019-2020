@@ -20,8 +20,8 @@ public class SoundMandala extends PApplet
 
 	public void settings()
 	{
-		fullScreen();
-		//size(1024, 1024);
+		// fullScreen();
+		size(1024, 1024);
 	}
 
 	public void setup() 
