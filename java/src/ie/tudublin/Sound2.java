@@ -43,7 +43,6 @@ public class Sound2 extends PApplet
 
 	public void keyPressed()
 	{
-<<<<<<< HEAD
 		as.stop();
 		as.trigger();
 
@@ -70,13 +69,6 @@ public class Sound2 extends PApplet
 			line(cx, cy, x, y);
 		}
 		offs += 10f;
-=======
-		if (key == ' ')
-		{
-			as.stop();
-			as.trigger();
-		}
->>>>>>> lab5solution
 	}
 	
 	public void draw()
@@ -92,7 +84,7 @@ public class Sound2 extends PApplet
 				, 255
 				, 255
 			);
-			//line(i, cy, i, cy + ai.left.get(i) * cy);
+			line(i, cy, i, cy + as.left.get(i) * cy);
 			sum += abs(as.left.get(i));
 		}
 		float average = sum / as.bufferSize();
@@ -114,6 +106,6 @@ public class Sound2 extends PApplet
 		textSize(22);
 		text(freq, 100, 50);
 
-		circleVisual();
+		// circleVisual();
 	}
 }
